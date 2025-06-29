@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Histórico de Gastos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <div class="contenedor">
+        <div style="text-align: left; margin: 20px;">
+            <a href="/" style="text-decoration: none; font-size: 20px;">⬅️ Volver</a>
+        </div>
+
+        <h1>Histórico de Gastos por Mes</h1>
+
+        {% if not hay_datos %}
+        <div class="cuadro-info">
+            <p>No hay datos registrados aún.</p>
+        </div>
+        {% else %}
+        <form method="POST">
+            <label>Selecciona el mes:</label>
+            <select name="mes" required>
+                <option value="">Mes</option>
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <input type="submit" value="Filtrar">
+        </form>
+
+        {% if gastos %}
+        <table class="tabla-movimientos">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
+                    <th>Monto</th>
+                    <th>Comentario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for g in gastos %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ g['fecha'] }}</td>
+                    <td>{{ g['categoria'] }}</td>
+                    <td>${{ g['monto'] }}</td>
+                    <td>{{ g['comentario'] }}</td>
+                    <td id="td">
+                        <a href="/eliminar/{{ g['id'] }}" style="color:red; font-size: 18px;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% elif mensaje %}
+        <div class="cuadro-info">
+            <p>{{ mensaje }}</p>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</body>
+
+</html>

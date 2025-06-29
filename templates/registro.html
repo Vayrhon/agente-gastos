@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Registrar Gasto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    {% if mensaje_error %}
+    <div class="cuadro-info-4" style="background:#c0392b; color:white;">
+        <p>{{ mensaje_error|safe }}</p>
+
+    </div>
+    {% endif %}
+
+    <div style="text-align: left; margin: 20px;">
+        <a href="/" style="text-decoration: none; font-size: 20px;">⬅️ Volver</a>
+    </div>
+
+    <div class="contenedor">
+        <h1>Registrar Gasto</h1>
+        <form method="POST">
+            <label>Fecha:</label>
+            <input type="date" name="fecha" required>
+
+            <label>Categoría:</label>
+            <select name="categoria" required>
+                <option value="">Seleccionar</option>
+                <option value="Comida">Comida</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Ocio">Ocio</option>
+                <option value="Salud">Salud</option>
+                <option value="Educación">Educación</option>
+                <option value="Paseos/Salidas">Paseos/Salidas</option>
+                <option value="Otros">Otros</option>
+            </select>
+
+            <label>Monto:</label>
+            <input type="number" step="0.01" name="monto" required>
+
+            <label>Comentario:</label>
+            <input type="text" name="comentario">
+
+            <div style="text-align: right;">
+                <input type="submit" value="Registrar">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

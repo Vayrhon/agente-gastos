@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Predicción de Gastos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+
+    <div class="contenedor">
+        <div style="text-align: left; margin: 20px;">
+            <a href="/" style="text-decoration: none; font-size: 20px;">⬅️ Volver</a>
+        </div>
+
+        <h1>Predicción y Tendencia</h1>
+
+        <div class="cuadro-info-1">
+            <h3>{{ pred_general }}</h3>
+        </div>
+
+        {% if mostrar_formulario %}
+        <form method="POST" class="formulario-prediccion">
+            <h2>Gastos Futuros por Categoría</h2>
+            <label>Categoría:</label>
+            <select name="categoria" required>
+                <option value="">Selecciona una categoría</option>
+                {% for c in categorias %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Predecir">
+        </form>
+        {% endif %}
+
+        {% if prediccion %}
+        <div class="cuadro-info-2">
+            <p>{{ prediccion }}</p>
+            {% if grafico %}
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="{{ url_for('static', filename=grafico.split('/')[-1]) }}"
+                    alt="Gráfico de predicción y tendencia" class="prediccion-img">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Agente de Gastos Personales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .graficos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .grafico-card {
+            width: 250px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/registrar">Registrar Gasto</a>
+        <a href="/prediccion">Predicción</a>
+        <a href="/historico">Historial</a>
+        <a href="/presupuestos">Presupuestos</a>
+    </nav>
+
+    {% if no_presupuestos %}
+    <div class="cuadro-info-4" style="background:#c0392b; color:white;">
+        <p>No tienes presupuestos asignados aún. Ve a <a href="/presupuestos"
+                style="color:white; text-decoration:underline;">Presupuestos</a> para definirlos.</p>
+    </div>
+    {% endif %}
+
+    <div class="contenedor">
+        <h1>Resumen de Gastos</h1>
+
+        <div class="cuadro-info-1">
+            <h3>Total gastado: {{ total }} de {{ total_presupuesto }}</h3>
+        </div>
+
+        <!-- Gráficos individuales por categoría en filas de 3 -->
+        {% if grafico_data %}
+        <div class="cuadro-info-3">
+            <h2>Uso de Presupuestos por Categoría</h2>
+            <div class="graficos-container">
+                {% set colores =
+                ['#8e44ad','#1abc9c','#f39c12','#c0392b','#2980b9','#27ae60','#7f8c8d','#e67e22','#2ecc71','#34495e'] %}
+                {% for g in grafico_data %}
+                <div class="grafico-card">
+                    <h3 id="h3">{{ g.categoria }}</h3>
+                    <canvas id="grafico-{{ loop.index }}" width="200" height="200"></canvas>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fecha</th>
+                    <th>Categoría</th>
+                    <th>Monto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if gastos %}
+                {% for g in gastos %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ g['fecha'] }}</td>
+                    <td>{{ g['categoria'] }}</td>
+                    <td>${{ g['monto'] }}</td>
+                    <td>
+                        <a href="/eliminar/{{ g['id'] }}" style="color:red; font-size: 18px;">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6" style="text-align:center;">No hay datos disponibles.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const colores = ['#8e44ad', '#1abc9c', '#f39c12', '#f6ff00', '#2980b9', '#27ae60', '#7f8c8d', '#e67e22', '#2ecc71', '#34495e'];
+
+            const graficos = {{ grafico_data | tojson
+        }};
+
+        graficos.forEach((g, i) => {
+            const ctx = document.getElementById(`grafico-${i + 1}`).getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: [`Gastado: $${g.gastado}`, `Disponible: $${g.disponible}`],
+                    datasets: [{
+                        data: [g.gastado, g.disponible],
+                        backgroundColor: ['#ff1800', colores[i % colores.length]],
+
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+    });
+    </script>
+
+
+</body>
+
+</html>

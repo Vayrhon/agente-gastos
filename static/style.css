@@ -1,0 +1,264 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ecf0f1; /* Gris muy claro */
+  margin: 0;
+}
+
+.contenedor {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar {
+  background-color: #3498db; /* Azul Principal */
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 100px;
+}
+
+.navbar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 2px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #399cde; /* Azul Oscuro */
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+h1,
+h2 {
+  color: #000000; /* Gris Oscuro */
+  text-align: center;
+}
+
+h3 {
+  color: #ffffff;
+  text-align: center;
+}
+
+#h3 {
+  color: #000000;
+}
+
+p,
+label,
+input,
+select,
+a {
+  font-size: 16px;
+}
+
+a {
+  color: #3498db; /* Azul Principal */
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form {
+  max-width: 400px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  padding-right: 40px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px #ccc;
+}
+
+.formulario-prediccion {
+  margin: 20px auto;
+  max-width: 100%;
+  text-align: left;
+  box-shadow: none; /* elimina sombra */
+  padding: 20px; /* elimina padding interior */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #3498db; /* Azul Principal */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #2980b9; /* Azul Oscuro */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: white;
+  margin: 5px auto;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 600px;
+  box-shadow: 0px 0px 5px #ccc;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 20px auto;
+  background: white;
+  box-shadow: 0px 0px 10px #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #3498db; /* Azul Principal */
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e0e0e0;
+}
+
+.cuadro-info {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ccc;
+  font-size: 18px;
+}
+
+.cuadro-info-1 {
+  background: #3498db; /* Amarillo Advertencia */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ccc;
+  font-size: 18px;
+}
+
+.cuadro-info-2 {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ccc;
+  font-size: 18px;
+}
+
+.cuadro-info-3 {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ccc;
+  font-size: 18px;
+}
+
+.cuadro-info-4 {
+  background: white;
+  padding: 0.5px;
+  margin: 5px auto;
+  text-align: center;
+  box-shadow: 0px 0px 10px #ccc;
+  font-size: 18px;
+}
+
+.cuadro-info img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+#graficoPresupuestos {
+  max-width: 300px;
+  max-height: 300px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* ------------------------- *\
+
+/* Navbar responsive */
+@media (max-width: 768px) {
+  .navbar {
+    padding-right: 10px;
+  }
+  .navbar a {
+    box-sizing: border-box;
+  }
+}
+
+.graficos-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+}
+
+.grafico-card {
+    width: 200px; /* Tamaño base de los gráficos */
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .graficos-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .graficos-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* Tabla simplificada en celulares */
+
