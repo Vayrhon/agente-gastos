@@ -222,9 +222,61 @@ tr:hover {
   display: block;
 }
 
+.alerta {
+  display: block; /* ocupa todo el ancho del contenedor */
+  background: white;
+  padding: 15px 20px;
+  margin: 10px auto; /* centra el div */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  text-align: center;
+  max-width: 600px; /* ancho máximo para buena lectura */
+  width: 100%; /* ocupa el 90% del ancho disponible */
+}
+
+
+.alerta.rojo {
+  background: #ffe5e5;
+  border-left: 5px solid red;
+}
+
+.alerta.amarillo {
+  background: #fff8e1;
+  border-left: 5px solid orange;
+}
+
+.alerta.verde {
+  background: #e8f5e9;
+  border-left: 5px solid green;
+}
+
+
+.cuadro-info-4 {
+  background: transparent;
+  padding: 10px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: #aaa;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
 /* ------------------------- *\
 
-/* Navbar responsive */
+  /* Navbar responsive */
 @media (max-width: 768px) {
   .navbar {
     padding-right: 10px;
@@ -234,31 +286,4 @@ tr:hover {
   }
 }
 
-.graficos-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    justify-items: center;
-}
-
-.grafico-card {
-    width: 200px; /* Tamaño base de los gráficos */
-    text-align: center;
-}
-
-@media (max-width: 1024px) {
-    .graficos-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .graficos-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
 /* Tabla simplificada en celulares */
-

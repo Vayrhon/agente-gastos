@@ -18,26 +18,19 @@
         <h1>Histórico de Gastos por Mes</h1>
 
         {% if not hay_datos %}
-        <div class="cuadro-info">
-            <p>No hay datos registrados aún.</p>
+        <div class="cuadro-info-1">
+            <h3>No hay datos registrados aún.</h3>
         </div>
         {% else %}
         <form method="POST">
             <label>Selecciona el mes:</label>
             <select name="mes" required>
                 <option value="">Mes</option>
-                <option value="1">Enero</option>
-                <option value="2">Febrero</option>
-                <option value="3">Marzo</option>
-                <option value="4">Abril</option>
-                <option value="5">Mayo</option>
-                <option value="6">Junio</option>
-                <option value="7">Julio</option>
-                <option value="8">Agosto</option>
-                <option value="9">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
+                {% for mes in meses_disponibles %}
+                <option value="{{ mes }}">{{
+                    ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"][mes-1]
+                    }}</option>
+                {% endfor %}
             </select>
             <input type="submit" value="Filtrar">
         </form>
@@ -78,6 +71,15 @@
         {% endif %}
         {% endif %}
     </div>
+    {% if mostrar_cartola and mes_seleccionado %}
+    <div style="margin-top:20px; text-align:center;">
+        <a href="/cartola/{{ mes_seleccionado }}" target="_blank"
+            style="background:#27ae60; color:white; padding:10px 20px; text-decoration:none; border-radius:4px; display:inline-block;">
+            📄 Generar Cartola Mensual
+        </a>
+    </div>
+    {% endif %}
+
 </body>
 
 </html>
